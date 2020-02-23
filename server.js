@@ -1,3 +1,32 @@
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/School')
+.then(()=>console.log('Connected Database'))
+.catch(()=>console.log('Error'))
+
+const courseSchema = new mongoose.Schema({
+    name: String,
+    author: String,
+    tags: [String],
+    date: {type: Date, default: Date.now},
+    isPublished: Boolean
+})
+
+const Course = mongoose.model('Courses', courseSchema);
+
+async function createCourse(){
+    const course = new Course({
+        name: 'Fat',
+        author: 'Nos',
+        tags: ['fff', 'esd'],
+        isPublished: true
+    })
+    const result = await  course.save();
+    console.log(result);
+}
+
+createCourse();
+
+
 const Joi = require('joi');
 const express = require('express');
 const app = express();
