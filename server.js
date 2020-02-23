@@ -1,7 +1,23 @@
 const Joi = require('joi');
 const express = require('express');
-const app = express()
-app.use(express.json())
+const app = express();
+
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`App: ${app.get('env')}`);
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.static('public'));
+
+app.use(function(req, res, next) {
+    console.log('Login....')
+    next();
+});
+
+app.use(function(req, res, next) { 
+    console.log('Authenticate....')
+    next();
+});
 
 const courses = [
     {id: 1, name: 'courses1'},
