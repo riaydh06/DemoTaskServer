@@ -9,7 +9,6 @@ const courses = [
     {id: 3, name: 'courses3'},
     {id: 4, name: 'courses4'},
     {id: 5, name: 'courses5'}
-
 ]
 
 app.get('/', (req,res)=>{
