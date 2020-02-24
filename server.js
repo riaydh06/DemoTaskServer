@@ -4,7 +4,7 @@ mongoose.connect('mongodb://localhost/School')
 .catch(()=>console.log('Error'))
 
 const courseSchema = new mongoose.Schema({
-    name: String,
+    name: {type: String, required: true},
     author: String,
     tags: [String],
     date: {type: Date, default: Date.now},
@@ -15,13 +15,18 @@ const Course = mongoose.model('Courses', courseSchema);
 
 async function createCourse(){
     const course = new Course({
-        name: 'Mosh',
+        // name: 'Mosh',
         author: 'ggg',
         tags: ['ddd', 'eee'],
         isPublished: true
-    })
-    const result = await  course.save();
-    console.log(result);
+    }) 
+    try{
+        const result = await  course.save();
+        console.log(result);
+    }catch(e){
+        console.log(e.message)
+    }
+    
 }
 
 createCourse();
@@ -54,7 +59,7 @@ async function getCourse(){
     // .sort({name: 1})
     // .select({name: 1,tags: 1})
     // .skip((pageNumber-1)*pageSize)
-    .count()
+    // .count()
     console.log(courses);
 }
 
