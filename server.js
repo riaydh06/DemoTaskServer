@@ -1,5 +1,15 @@
+const Joi = require('joi');
+const express = require('express');
+const app = express();
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/School')
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.static('public'));
+
+const db = require('./config/dbConfig').mongoURI;
+
+mongoose.connect(db)
 .then(()=>console.log('Connected Database'))
 .catch(()=>console.log('Error'))
 
@@ -66,16 +76,12 @@ async function getCourse(){
 getCourse();
 
 
-const Joi = require('joi');
-const express = require('express');
-const app = express();
+
 
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`App: ${app.get('env')}`);
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(express.static('public'));
+
 
 app.use(function(req, res, next) {
     console.log('Login....')
