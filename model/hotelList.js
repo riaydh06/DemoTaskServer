@@ -9,7 +9,7 @@ const hotelListSchema = new mongoose.Schema({
     price: String,
     type: String,
     comments: String,
-    avarar: String,
+    avatar: String,
     user: String,
     country: String
 })
