@@ -15,9 +15,9 @@ const Course = mongoose.model('Courses', courseSchema);
 
 async function createCourse(){
     const course = new Course({
-        name: 'Fat',
-        author: 'Nos',
-        tags: ['fff', 'esd'],
+        name: 'Mosh',
+        author: 'ggg',
+        tags: ['ddd', 'eee'],
         isPublished: true
     })
     const result = await  course.save();
@@ -25,6 +25,40 @@ async function createCourse(){
 }
 
 createCourse();
+
+async function getCourse(){
+    // eq(equal)
+    // ne (not equal)
+    // gt (greater than or equal to)
+    // lt (less than)
+    // lte (less than or eual to)
+    // in 
+    // nin (not in)
+
+    // or
+    // and
+
+    const pageNumber = 2;
+    const pageSize = 10;
+
+    const courses = await Course.find({name: /^Mosh/,isPublished: true})
+    // .find({author: 'Mosh',isPublished: true})
+    // .find({price: {$gt: 10, $lte: 20}})
+    // .find({price: {$in: [10,15,20]}})
+    // .find({name: /^Mosh/,isPublished: true})
+    // .find({author: /.*Mosh.*/i,isPublished: true})
+    // .find({author: /Hamidani$/i,isPublished: true})
+    // .or([{author: 'Mosh'}, {isPublished: true}])
+    // .and([{author: 'Mosh'}, {isPublished: true}])
+    // .limit(10) 
+    // .sort({name: 1})
+    // .select({name: 1,tags: 1})
+    // .skip((pageNumber-1)*pageSize)
+    .count()
+    console.log(courses);
+}
+
+getCourse();
 
 
 const Joi = require('joi');
